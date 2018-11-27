@@ -9,11 +9,12 @@ import android.widget.TextView;
 import com.derrick.aad.R;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TvAdapter extends ListAdapter<TvEntry, TvAdapter.MyViewHolder> {
+public class TvAdapter extends PagedListAdapter<TvEntry, TvAdapter.MyViewHolder> {
 
     private static final String LOG_TAG = TvAdapter.class.getSimpleName();
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -25,7 +26,7 @@ public class TvRepository {
     private TvDao mTvDao;
 
 
-    private LiveData<List<TvEntry>> mTvShowList;
+    private LiveData<PagedList<TvEntry>> mTvShowList;
 
 
     public TvRepository(Application mApplication) {
@@ -35,21 +36,19 @@ public class TvRepository {
         /*mTvShowList = new LivePagedListBuilder<>(
                 mTvDao.getTvShows(), *//* page size *//* 5).build();*/
 
-
         PagedList.Config pagedListConfig =
                 (new PagedList.Config.Builder())
-                        .setEnablePlaceholders(false)
-                        .setInitialLoadSizeHint(20)
+                        .setEnablePlaceholders(true)
+                        ///.setInitialLoadSizeHint(20)
                         .setPageSize(10).build();
 
+        mTvShowList = new LivePagedListBuilder<>(mTvDao.getTvShows(), pagedListConfig).build();
 
-        //mTvShowList = new LivePagedListBuilder<>(mTvDao.getTvShows(), pagedListConfig).build();
-
-        mTvShowList = mTvDao.getTvShows();
+        //mTvShowList = mTvDao.getTvShows();
 
     }
 
-    public LiveData<List<TvEntry>> getTvShowList() {
+    public LiveData<PagedList<TvEntry>> getTvShowList() {
         Log.d(LOG_TAG, "@Total xx::" + mTvShowList);
         return mTvShowList;
     }

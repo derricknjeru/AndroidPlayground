@@ -23,7 +23,7 @@ public class TvShowViewModel extends AndroidViewModel {
         mTvRepository.fetchTvShows();
     }
 
-    public LiveData<List<TvEntry>> getTvShowListLiveData() {
+    public LiveData<PagedList<TvEntry>> getTvShowListLiveData() {
 
         return mTvRepository.getTvShowList();
     }
